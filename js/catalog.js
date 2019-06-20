@@ -56,12 +56,19 @@ function updateCartPreview(event) {
   // TODO: get the quantity
   var quantity = event.target.quantity.value;
   // get cartContent div
-  // TODO: Add a new element to the cartContents div with that information
+  var divElement = document.getElementById('cartContents');
   // create a UL
+  var ulElement = document.createElement('ul');
   // create an LI
+  var liElement = document.createElement('li');
+
+  console.log('upCartPReview');
   // set textContent of Li to string of quantity and itemName
+  liElement.textContent = `${quantity} - ${itemName}`;
   // appendchild to UL
+  ulElement.appendChild(liElement);
   // append UL to cartContent Div
+  divElement.appendChild(ulElement);
 }
 
 // Set up the "submit" event listener on the form.
