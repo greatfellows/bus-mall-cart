@@ -1,18 +1,27 @@
 header{
     background-color: rgb(61, 78, 78);
-    margin: 100px;
+   
     color: rgb(201, 195, 195)
     
 }
 body{
     background-color: lightblue;
     color: rgb(51, 55, 59);
-    height: 70px;
-    width: span;
-    margin: 100px;
+    
+    
+    
+   
+}
+main{
+    width: 1024px;
+    margin: auto;
+
 }
 
-#div{
+#cartContents{
     background-color: whitesmoke;
+    text-align: right;
+
     
 }
+
