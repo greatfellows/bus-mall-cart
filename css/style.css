@@ -1,18 +1,39 @@
-header{
-    background-color: rgb(61, 78, 78);
-    margin: 100px;
-    color: rgb(201, 195, 195)
-    
-}
+
 body{
     background-color: lightblue;
     color: rgb(51, 55, 59);
+    width: 1024px;
+    margin: auto;
+}
+body > header{
     height: 70px;
-    width: span;
-    margin: 100px;
+
+}
+main{
+    width: 960px;
+    margin: auto;
+
+}
+main > section:first-child {
+    width: 480px;
+    float: left;
+}
+main > section:last-child {
+    width: 480px;
+    float: right;
+}
+main > section:first-child > div > header {
+    background-color: red;
+   
+    color: rgb(201, 195, 195)
+    
+}
+main > header{
+
+
 }
 
-#div{
-    background-color: whitesmoke;
-    
+#cartContents{
+    text-align: right;
+
 }
