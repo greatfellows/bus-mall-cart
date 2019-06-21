@@ -10,6 +10,7 @@ function loadCart() {
   var cartItems = JSON.parse(localStorage.getItem('shoppingList'));
   cart = new Cart(cartItems);
 }
+
 // Make magic happen --- re-pull the Cart, clear out the screen and re-draw it
 function renderCart() {
   loadCart();
@@ -30,7 +31,7 @@ function showCart() {
   var elTbody = document.getElementsByTagName('tbody')[0];
 
   // TODO: Iterate over the items in the cart
-  for(var i = 0; i<cart.items.length; i++){
+  for (var i = 0; i < cart.items.length; i++) {
     var elTr = document.createElement('tr');
     var elDelete = document.createElement('td');
     var elQ = document.createElement('td');
