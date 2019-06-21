@@ -1,31 +1,62 @@
 'use strict';
 
+
 // Cart constructor.
 var Cart = function (items) {
-  // this.items is an array of CartItem instances.
   this.items = items;
 };
+var cart = new Cart([]);
 
+// create a new CartItem and add it to this.items
 Cart.prototype.addItem = function (product, quantity) {
-  // TODO: Fill in this instance method to create a new CartItem and add it to this.items
-  var tempItem = new CartItem(product, quantity);
-  this.items.push(tempItem);
+  var isInCart = false;
+  // if cart is not empty check if item already in cart
+  if (cart.items.length) {
+    for (let i = 0; i < cart.items.length; i++) {
+      if (cart.items[i].productName === product) {
+        isInCart = true;
+        var updatedQuantity = parseInt(cart.items[i].quantity) + parseInt(quantity);
+        cart.items[i].quantity = updatedQuantity;
+        console.log('item already in cart');
+        break;
+      }
+    }
+  }
+
+  // if item not in cart create it
+  if (!isInCart) {
+    var tempItem = new CartItem(product, quantity);
+    this.items.push(tempItem);
+  }
+
+  this.saveToLocalStorage();
+
+};
+
+Cart.prototype.removeItem = function (productName) {
+  for (var i = 0; i < this.items.length; i++) {
+    if (this.items[i].productName === productName) {
+      this.items.splice(i, 1);
+    }
+  }
   this.saveToLocalStorage();
 };
 
 Cart.prototype.saveToLocalStorage = function () {
   // TODO: Fill in this instance method to save the contents of the cart to localStorage
-  var shoppingList = JSON.stringify(this.items);
-  localStorage.setItem('shoppingList', shoppingList);
+  var cartItemList = JSON.stringify(this.items);
+  localStorage.setItem('cartData', cartItemList);
 };
 
-Cart.prototype.removeItem = function (item) {
-  // TODO: Fill in this instance method to remove one item from the cart.
-  // Note: You will have to decide what kind of parameter to pass in here!
+Cart.prototype.loadFromLocalStorage = function () {
+  var cartItemList = JSON.parse(localStorage.getItem('cartData'));
+  if (cartItemList) {
+    cart.items = cartItemList;
+  }
 };
 
-var CartItem = function (product, quantity) {
-  this.product = product;
+var CartItem = function (productName, quantity) {
+  this.productName = productName;
   this.quantity = quantity;
 };
 
@@ -61,4 +92,5 @@ function generateCatalog() {
 }
 
 // Initialize the app by creating the big list of products with images and names
+cart.loadFromLocalStorage();
 generateCatalog();
