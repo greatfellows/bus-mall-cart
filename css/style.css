@@ -35,5 +35,22 @@ main > header{
 
 #cartContents{
     text-align: right;
+}
 
+td {
+    padding: 5px;
+}
+
+th {
+    padding: 15px;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.deck {
+    padding: 10px;
+    border: dashed darkblue;
 }
