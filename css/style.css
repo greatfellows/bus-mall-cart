@@ -28,10 +28,6 @@ main > section:first-child > div > header {
     color: rgb(201, 195, 195)
     
 }
-main > header{
-
-
-}
 
 #cartContents{
     text-align: right;
