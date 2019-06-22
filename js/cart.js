@@ -31,6 +31,8 @@ function showCart() {
     var tdDelete = document.createElement('td');
     var tdQuantity = document.createElement('td');
     var tdProductName = document.createElement('td');
+    var tdImage = document.createElement('td');
+    var imageElement = document.createElement('img');
     // create delete button
     var deleteButton = document.createElement('input');
 
@@ -40,20 +42,30 @@ function showCart() {
     deleteButton.onclick = 'removeItemFromCart()';
     tdQuantity.textContent = cart.items[i].quantity;
     tdProductName.textContent = cart.items[i].productName;
+    imageElement.src = cart.items[i].filePath;
+    imageElement.alt = cart.items[i].name;
+    imageElement.height = '30';
+    imageElement.width = '30';
 
+    console.log(tdImage);
     // attach all elements
+    tdImage.appendChild(imageElement);
     tdDelete.appendChild(deleteButton);
     trElement.appendChild(tdDelete);
     trElement.appendChild(tdQuantity);
     trElement.appendChild(tdProductName);
+    trElement.appendChild(tdImage);
     tBodyElement.appendChild(trElement);
   }
 }
 
+
 function removeItemFromCart(event) {
-  var productName = event.target.parentNode.parentNode.childNodes[2].innerText;
-  cart.removeItem(productName);
-  renderCart();
+  if (event.target.localName !== 'img') {
+    var productName = event.target.parentNode.parentNode.childNodes[2].innerText;
+    cart.removeItem(productName);
+    renderCart();
+  }
 }
 
 // This will initialize the page and draw the cart on screen
