@@ -53,6 +53,11 @@ Cart.prototype.loadFromLocalStorage = function () {
   if (cartItemList) {
     cart.items = cartItemList;
   }
+  //TODO : create number of items in cart counter
+  var itemCount = parseInt(cartItemList.length);
+  document.getElementById('itemCount').innerHTML = '(' + itemCount + ')';
+  document.write(itemCount);
+
 };
 
 var CartItem = function (productName, quantity) {
@@ -94,3 +99,5 @@ function generateCatalog() {
 // Initialize the app by creating the big list of products with images and names
 cart.loadFromLocalStorage();
 generateCatalog();
+
+
