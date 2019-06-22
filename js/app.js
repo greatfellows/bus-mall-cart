@@ -28,7 +28,7 @@ Cart.prototype.addItem = function (product, quantity) {
     var tempItem = new CartItem(product, quantity);
     this.items.push(tempItem);
   }
-
+  
   this.saveToLocalStorage();
 
 };
