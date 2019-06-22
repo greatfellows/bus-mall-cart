@@ -45,7 +45,6 @@ nav > ul > li {
     margin-left: 30px;
     padding: 20px 0px;
     text-align: center;
-    width: 100px;
 }
 
 li > a {
@@ -59,7 +58,11 @@ li > a:hover {
     color: black;
     transition-duration: 300ms;
 }
-
+#itemCount {
+    width: 30px;
+    height : 30px;
+    float: right;
+}
 main{
     width: 1024px;
     margin: 10px auto;
