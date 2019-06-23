@@ -1,5 +1,7 @@
 'use strict';
 
+//spanElement = the current cart item count HTML element at the top right
+var spanElement = document.getElementById('itemCount');
 
 // Cart constructor.
 var Cart = function (items) {
@@ -17,7 +19,6 @@ Cart.prototype.addItem = function (product, quantity) {
         isInCart = true;
         var updatedQuantity = parseInt(cart.items[i].quantity) + parseInt(quantity);
         cart.items[i].quantity = updatedQuantity;
-        console.log('item already in cart');
         break;
       }
     }
@@ -28,9 +29,8 @@ Cart.prototype.addItem = function (product, quantity) {
     var tempItem = new CartItem(product, quantity);
     this.items.push(tempItem);
   }
-  
-  this.saveToLocalStorage();
 
+  this.saveToLocalStorage();
 };
 
 Cart.prototype.removeItem = function (productName) {
@@ -46,18 +46,33 @@ Cart.prototype.saveToLocalStorage = function () {
   // TODO: Fill in this instance method to save the contents of the cart to localStorage
   var cartItemList = JSON.stringify(this.items);
   localStorage.setItem('cartData', cartItemList);
+
+  // Whenever localStorage is updated the below updates the cart item count in the top right
+  if (isNaN(this.items.length) || this.items.length === 0){
+    spanElement.textContent = '( ' + 0 + ' )';
+  } else {
+    var itemCount = 0;
+    for (var i = 0; i < cartItemList.length; i++){
+      cartItemList = JSON.parse(localStorage.getItem('cartData'));
+      itemCount += parseInt(cartItemList[i].quantity);
+      spanElement.textContent = `( ${itemCount} )`;
+    }
+  }
 };
 
 Cart.prototype.loadFromLocalStorage = function () {
   var cartItemList = JSON.parse(localStorage.getItem('cartData'));
+  var itemCount = 0;
+
   if (cartItemList) {
     cart.items = cartItemList;
+    for(var i = 0; i < cart.items.length; i++){
+      itemCount += parseInt(cart.items[i].quantity);
+    }
+    spanElement.textContent = `( ${itemCount} )`;
+  } else {
+    spanElement.textContent = '( ' + 0 + ' )';
   }
-  //TODO : create number of items in cart counter
-  var itemCount = parseInt(cartItemList.length);
-  document.getElementById('itemCount').innerHTML = '(' + itemCount + ')';
-  document.write(itemCount);
-
 };
 
 var CartItem = function (productName, quantity) {
@@ -99,5 +114,3 @@ function generateCatalog() {
 // Initialize the app by creating the big list of products with images and names
 cart.loadFromLocalStorage();
 generateCatalog();
-
-
