@@ -34,11 +34,6 @@ Cart.prototype.addItem = function (itemName, quantity) {
       }
     }
   }
-<<<<<<< HEAD
-=======
-  this.saveToLocalStorage();
->>>>>>> master
-
   this.saveToLocalStorage();
 };
 

@@ -151,17 +151,16 @@ thead > tr {
 }
 
 tr {
-    border-bottom: 1px solid white;
+    height: 30px;
 }
 
 td {
-    font-size: 15px;
-    padding: 10px;
+    font-size: 20px;
+    padding: 10px 0px;
 }
 
 th {
     padding: 10px;
-    width: 180px;
 }
 
 footer {
