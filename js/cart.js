@@ -7,6 +7,12 @@ table.addEventListener('click', removeItemFromCart);
 
 // Make magic happen --- re-pull the Cart, clear out the screen and re-draw it
 function renderCart() {
+  var theadElement = document.getElementsByTagName('thead')[0];
+  var trElement = theadElement.childNodes[1];
+  var thLastElement = document.createElement('th');
+  thLastElement.textContent = ' ';
+  trElement.appendChild(thLastElement);
+  theadElement.hasPointerCapture(thLastElement);
   clearCart();
   showCart();
 }
@@ -47,7 +53,6 @@ function showCart() {
     imageElement.height = '30';
     imageElement.width = '30';
 
-    console.log(tdImage);
     // attach all elements
     tdImage.appendChild(imageElement);
     tdDelete.appendChild(deleteButton);
