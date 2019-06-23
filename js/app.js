@@ -10,12 +10,12 @@ var Cart = function (items) {
 var cart = new Cart([]);
 
 // create a new CartItem and add it to this.items
-Cart.prototype.addItem = function (product, quantity) {
+Cart.prototype.addItem = function (itemName, quantity) {
   var isInCart = false;
   // if cart is not empty check if item already in cart
   if (cart.items.length) {
     for (let i = 0; i < cart.items.length; i++) {
-      if (cart.items[i].productName === product) {
+      if (cart.items[i].productName === itemName) {
         isInCart = true;
         var updatedQuantity = parseInt(cart.items[i].quantity) + parseInt(quantity);
         cart.items[i].quantity = updatedQuantity;
@@ -26,9 +26,18 @@ Cart.prototype.addItem = function (product, quantity) {
 
   // if item not in cart create it
   if (!isInCart) {
-    var tempItem = new CartItem(product, quantity);
-    this.items.push(tempItem);
+    // find the right product by itemName
+    for (let i = 0; i < Product.allProducts.length; i++) {
+      if (Product.allProducts[i].name === itemName) {
+        var tempItem = new CartItem(Product.allProducts[i], quantity);
+        this.items.push(tempItem);
+      }
+    }
   }
+<<<<<<< HEAD
+=======
+  this.saveToLocalStorage();
+>>>>>>> master
 
   this.saveToLocalStorage();
 };
@@ -75,9 +84,10 @@ Cart.prototype.loadFromLocalStorage = function () {
   }
 };
 
-var CartItem = function (productName, quantity) {
-  this.productName = productName;
+var CartItem = function (product, quantity) {
+  this.productName = product.name;
   this.quantity = quantity;
+  this.filePath = product.filePath;
 };
 
 // Product contructor.
